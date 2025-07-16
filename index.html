@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="compare.js"></script>
+<script src="stringify.js"></script>
+<script src="wortify.js"></script>
+</head>
+<body>
+    <style>
+        .change{
+            display:inline;
+            padding: 0 10px;
+            background-color:#ffcc00;
+        }
+    </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/// Mögliche Varianten:
+		///
+		/// Variante 1 - String 2 wurde am Ende erweitert
+		/// Das ist ein String
+		/// Das ist ein Stringennn
+		///
+		/// Variante 2 - String 2 wurde am Ende gekürzt
+		/// Das ist ein String
+		/// Das ist ein
+		///
+		/// Variante 3 - String 2 wurde mittendrin erweitert
+		/// Das ist ein String
+		/// Das ist ein neuer String
+		///
+		/// Variante 4 - String 2 wurde mittendrin gekürzt
+		/// Das ist ein String
+		/// Das ist String
+		/// 
+		/// Variante 5 - String 2 wurde verändert, besitzt aber die gleiche Länge
+		/// Das ist ein String
+		/// Das ist ein Praing
+	   // var compare = new Compare("Das ist ein Test mal schauen wie es funktioniert oder nicht mal so sehr", "Das ist a Test funktioniert nicht mal so sehrt"); // Variante 4
+	     var compare = new Compare("Das ist ein Test", "Das ist ein Test erweitert"); // Variante 1
+	     compare = new Compare("Das ist ein Test", "Das ist ein"); // Variante 2
+	     compare = new Compare("Das ist ein Test", "Das ist Test ein Test"); // Variante 3
+	     compare = new Compare("Das ist ein Test", "Das ist Test"); // Variante 4
+	     compare = new Compare("Das ist ein Test oder vllt. doch", "Das ist ein Testa oder vllt. doch"); // Variante 5
+	     compare = new Compare("Das ist ein Text mit Sonderzeichen, hier kommen < und > und ( und ) und # sowie * und ~ vor.", "Das ist ein Text mit Sonderzeichen, hier kommen < < und > und ( und ) und # sowie * und ~ vor."); // Variante 6
+	   compare = new Compare(
+             "Das ist ein Text der nun etwas länger wird, zwischen drin werden Zeichen hinzugefügt!",
+             "Das ist ein Text der nun etwas länger wird, dies ist eine verlängerung, zwischen drin werden Zeichen hinzugefügt!"
+        ); // Variante 7
+	   compare = new Compare(
+            "Das ist ein Text der nun etwas länger wird, zwischen drin werden Zeichen hinzugefügt! Mal schauen was jetzt noch passiert.",
+            "Das ist ein Text der nun etwas länger wird, dies ist eine verlängerung, zwischen Zeichen hinzugefügt! Mal schauen hier was jetzt noch passiert."
+       ); // Variante 8
+	   compare = new Compare(
+           "Müller ist schon länger als möglicher Nachfolger von Winterkorn im Gespräch. Sein Name fiel bereits, bevor Winterkorn am Mittwoch die Konsequenz aus dem Skandal um manipulierte Abgaswerte zog und zurücktrat. Schon als Winterkorn sich im Frühjahr einen Machtkampf mit dem Konzernpatriarchen und damaligen Aufsichtsratschef Ferdinand Piëch lieferte, war Müller als Nachfolger im Gespräch.",
+           "Müller ist schon länger als möglicher Nachfolger von Winterkorn im Gespräch. Sein Name fiel bereits, bevor Winterkorn am Mittwoch die Konsequenz aus dem Skandal um manipulierte Abgaswerte zog und zurücktrat. Schon als Winterkorn sich im Frühjahr einen Machtkampf mit dem Konzernpatriarchenj und damaligen Aufsichtsratschef Piëch lieferte, war Müller als Nachfolger im Gespräch."
+      ); // Variante 9
+
+	    // Ultimativer test
+	    $(".go").on("click", function () {
+	        var string1 = $(".string_1").text();
+	        var string2 = $(".string_2").text();
+
+	        $(".output").html("");
+
+	        var compare = new Compare(string1, string2);
+	    });
+        /*
+	    var string1 = "Das ist ein Text der jetzt gleich gekürzt und erweitert wird.";
+	    var string2 = "Das ist Text der jetzt und wie toll erweitert wird. oder auch nicht";
+
+	    var compare = new Compare(string1, string2);*/
+	});
+</script>
+
+<table style="width:100%;">
+    <tr>
+        <td>
+            Text 1:
+        </td>
+        <td>
+            <textarea class="string_1" style="width:500px; height:200px;" name="string_1">
+                Müller ist schon länger als möglicher Nachfolger von Winterkorn im Gespräch.
+                Sein Name fiel bereits, bevor Winterkorn am Mittwoch die Konsequenz aus dem
+                Skandal um manipulierte Abgaswerte zog und zurücktrat. Schon als Winterkorn
+                sich im Frühjahr einen Machtkampf mit dem Konzernpatriarchen und damaligen
+                Aufsichtsratschef Ferdinand Piëch lieferte, war Müller als Nachfolger im
+                Gespräch.
+            </textarea>
+
+        </td>
+        <td>
+            Text 2:
+        </td>
+        <td>
+            <textarea class="string_2" style="width:500px; height:200px;" name="string_2">
+                Müller ist schon länger als möglicher Nachfolger von Winterkorn im Gespräch.
+                Sein Name fiel bereits, bevor Winterkorn am Mittwoch die Konsequenz aus dem
+                Skandal um manipulierte Abgaswerte zog und zurücktrat. Schon als Winterkorn
+                sich im Frühjahr einen Machtkampf mit dem Konzernpatriarchen und damaligen
+                Aufsichtsratschef Piëch lieferte, war Müller als Nachfolger im
+                Gespräch.
+            </textarea>
+        </td>
+        <td>
+            <input type="button" name="confirm" class="go" value="GO">
+        </td>
+    </tr>
+</table>
+
+
+
+<div class="output"></div>
+</body>
+</html>
